@@ -1,0 +1,7 @@
+# Add files here to ignore them from prettier formatting
+node_modules/
+.next
+package-lock.json
+.idea/
+pnpm-lock.yaml
+bun.lockb

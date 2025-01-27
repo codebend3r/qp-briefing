@@ -1,0 +1,38 @@
+@use "@styles/_theme";
+@use "@styles/_colors";
+@use "@styles/_variables";
+
+@import "@styles/_breakpoints";
+
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: map-get(theme.$spacing, sm);
+  padding: map-get(theme.$spacing, sm);
+  max-width: 1440px;
+  margin: 0 auto;
+
+  @include breakpoint-max(variables.$xl) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: map-get(theme.$spacing, sm);
+    padding: map-get(theme.$spacing, sm);
+  }
+
+  @include breakpoint-max(variables.$lg) {
+    grid-template-columns: 1fr;
+    gap: map-get(theme.$spacing, sm);
+    padding: map-get(theme.$spacing, sm);
+  }
+
+  @include breakpoint-max(variables.$md) {
+    grid-template-columns: 1fr;
+    gap: map-get(theme.$spacing, sm);
+    padding: map-get(theme.$spacing, sm);
+  }
+
+  @include breakpoint-max(variables.$sm) {
+    grid-template-columns: 1fr;
+    gap: map-get(theme.$spacing, sm);
+    padding: map-get(theme.$spacing, sm);
+  }
+}

@@ -1,0 +1,13 @@
+@import "@styles/_variables";
+
+@mixin breakpoint-min($bp) {
+  @media screen and (min-width: #{$bp}#{$unit}) {
+    @content;
+  }
+}
+
+@mixin breakpoint-max($bp) {
+  @media screen and (max-width: #{$bp}#{$unit}) {
+    @content;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "esnext",
+    "paths": {
+      "@/*": ["./*"],
+      "@axios/*": ["./axios/*"],
+      "@api/*": ["./pages/api/*"],
+      "@components/*": ["./components/*"],
+      "@constants": ["./constants/index.js"],
+      "@hooks/*": ["./hooks/*"],
+      "@lib/*": ["./lib/*"],
+      "@pages/*": ["./pages/*"],
+      "@styles/*": ["./styles/*"]
+    }
+  }
+}

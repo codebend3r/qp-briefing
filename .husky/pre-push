@@ -1,0 +1,3 @@
+echo "Running pre-push hook"
+
+pnpm pre-push

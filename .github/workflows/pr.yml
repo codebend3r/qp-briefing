@@ -1,0 +1,75 @@
+name: Pull Requests
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pr-check:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      EMAIL_SERVER_HOST: ${{ secrets.EMAIL_SERVER_HOST }}
+      EMAIL_SERVER_PASSWORD: ${{ secrets.EMAIL_SERVER_PASSWORD }}
+      EMAIL_SERVER_PORT: ${{ secrets.EMAIL_SERVER_PORT }}
+      EMAIL_SERVER_USER: ${{ secrets.EMAIL_SERVER_USER }}
+      GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      QPB_REFRESH_TOKEN: ${{ secrets.QPB_REFRESH_TOKEN }}
+      SANITY_API_TOKEN: ${{ secrets.SANITY_API_TOKEN }}
+      SANITY_PREVIEW_SECRET: ${{ secrets.SANITY_PREVIEW_SECRET }}
+      SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+      NODE_TLS_REJECT_UNAUTHORIZED: ${{ secrets.NODE_TLS_REJECT_UNAUTHORIZED }}
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
+      VERCEL_FORCE_NO_BUILD_CACHE: 1
+
+    steps:
+      - name: 🍟 Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: 🍩 Setup Node v18
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.20.3"
+
+      - name: 🤖 Setup NPM Version
+        run: npm install -g npm@10.8.3
+
+      - name: 📦 PNPM Install
+        uses: pnpm/action-setup@v4
+
+      - name: 🐲 Diff Check (Before CI Checks)
+        run: pnpm diff-exit-code
+
+      - name: 🧹 Remove File
+        uses: JesseTG/rm@v1.0.3
+        with:
+          path: ~/.next .next
+
+      - name: 🚀 Install Dependencies
+        run: pnpm install
+
+      - name: ✨ Prettier
+        run: pnpm prettier:check
+
+      - name: 🔍 ESLint
+        run: pnpm lint
+
+      - name: 🗄️ Prisma
+        run: pnpm prisma:generate
+
+      - name: 🏗️ Build
+        run: pnpm run build
+
+      - name: 🌀 Diff Check (After CI Checks)
+        run: pnpm diff-exit-code

@@ -1,0 +1,123 @@
+@use "@styles/_theme";
+@use "@styles/_colors";
+@use "@styles/_variables";
+
+@import "@styles/_breakpoints";
+
+.section {
+  display: grid;
+  grid-template-columns: 3fr 4fr 300px;
+  grid-template-areas: "primary secondary tertiary";
+  max-width: 1440px;
+  padding: map-get(theme.$spacing, md);
+  margin: 0 auto;
+  gap: map-get(theme.$spacing, sm);
+
+  @include breakpoint-max(variables.$xl) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "primary secondary" "tertiary tertiary";
+    gap: map-get(theme.$spacing, sm);
+    padding: map-get(theme.$spacing, sm);
+  }
+
+  @include breakpoint-max(variables.$lg) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "primary secondary" "tertiary tertiary";
+    gap: map-get(theme.$spacing, sm);
+    padding: map-get(theme.$spacing, sm);
+  }
+
+  @include breakpoint-max(variables.$md) {
+    grid-template-areas: "primary" "secondary" "tertiary";
+    grid-template-columns: 1fr;
+    gap: map-get(theme.$spacing, sm);
+    padding: map-get(theme.$spacing, sm);
+  }
+
+  @include breakpoint-max(variables.$sm) {
+    grid-template-areas: "primary" "secondary" "tertiary";
+    grid-template-columns: 1fr;
+    gap: map-get(theme.$spacing, sm);
+    padding: map-get(theme.$spacing, sm);
+  }
+}
+
+.primary {
+  display: flex;
+  flex-direction: column;
+  grid-area: primary;
+}
+
+.secondary {
+  display: flex;
+  flex-direction: column;
+  gap: map-get(theme.$spacing, sm);
+  grid-area: secondary;
+}
+
+.tertiary {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  grid-area: tertiary;
+
+  @include breakpoint-max(variables.$xl) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include breakpoint-max(variables.$lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include breakpoint-max(variables.$md) {
+    grid-template-columns: 1fr;
+    display: none;
+  }
+
+  @include breakpoint-max(variables.$sm) {
+    grid-template-columns: 1fr;
+    display: none;
+  }
+}
+
+/////
+
+.show-mobile-only {
+  display: none;
+
+  @include breakpoint-max(variables.$xl) {
+    display: none;
+  }
+
+  @include breakpoint-max(variables.$lg) {
+    display: none;
+  }
+
+  @include breakpoint-max(variables.$md) {
+    display: grid;
+  }
+
+  @include breakpoint-max(variables.$sm) {
+    display: grid;
+  }
+}
+
+.show-tablet-up {
+  display: none;
+
+  @include breakpoint-max(variables.$xl) {
+    display: none;
+  }
+
+  @include breakpoint-max(variables.$lg) {
+    display: none;
+  }
+
+  @include breakpoint-max(variables.$md) {
+    display: grid;
+  }
+
+  @include breakpoint-max(variables.$sm) {
+    display: grid;
+  }
+}

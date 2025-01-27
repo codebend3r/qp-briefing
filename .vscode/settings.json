@@ -1,0 +1,11 @@
+{
+  "git.ignoreLimitWarning": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "never",
+    "source.sortImports": "never",
+    "source.fixAll.eslint": "never",
+    "source.addMissingImports.ts": "never"
+  }
+}

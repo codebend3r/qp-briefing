@@ -1,0 +1,111 @@
+@use "@styles/_theme";
+@use "@styles/_colors";
+@use "@styles/_variables";
+
+@import "@styles/_breakpoints";
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-menu {
+  display: none;
+}
+
+// ul
+.list-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+// li
+.list-item {
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+  border-bottom: 4px solid transparent;
+  padding: 15px map-get(theme.$spacing, md);
+
+  &:hover {
+    border-bottom: 4px solid map-get(colors.$sky, 500);
+  }
+}
+
+.menu-parent {
+  position: relative;
+
+  &:hover {
+    .menu-children {
+      display: block;
+    }
+  }
+}
+
+.menu-children {
+  position: absolute;
+  top: 107%;
+  left: 0;
+  background: map-get(colors.$slate, 100);
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: map-get(theme.$shadow, sm);
+  z-index: 100;
+}
+
+.menu-children li {
+  padding: map-get(theme.$spacing, sm) map-get(theme.$spacing, md);
+  font-weight: 400;
+  text-align: left;
+}
+
+.menu-children li:hover {
+  background: map-get(colors.$sky, 400);
+  border-bottom: 4px solid transparent;
+  color: map-get(colors.$slate, 100);
+}
+
+.menu-children li:last-child {
+  border-bottom: none;
+}
+
+@include breakpoint-max(variables.$lg) {
+  .nav-menu {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: map-get(theme.$spacing, md);
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  .menu-children {
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .menu-children li {
+    padding: 0;
+    border-bottom: 1px solid map-get(colors.$slate, 200);
+  }
+
+  .menu-children li:last-child {
+    border-bottom: none;
+  }
+}

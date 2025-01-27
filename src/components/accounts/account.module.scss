@@ -1,0 +1,17 @@
+@use "@styles/_theme";
+@use "@styles/_colors";
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.title {
+  color: map-get(colors.$blue, 900);
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    margin: 0 map-get(theme.$spacing, sm);
+  }
+}

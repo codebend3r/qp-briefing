@@ -1,0 +1,22 @@
+{
+  "name": "QPB Dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "zsh"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "aaron-bond.better-comments",
+        "sleistner.vscode-fileutils",
+        "esbenp.prettier-vscode",
+        "mikestead.dotenv"
+      ]
+    }
+  },
+  "postCreateCommand": "bun install",
+  "forwardPorts": [3000]
+}
